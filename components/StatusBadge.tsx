@@ -1,5 +1,5 @@
-import { RequirementStatus } from "@/lib/types";
-import { PHASE_STATUS_MAP, PhaseId } from "@/lib/status";
+import { RequirementStatus, PhaseId } from "@/lib/types";
+import { PHASE_STATUS_MAP } from "@/lib/status";
 
 const phaseColors: Record<PhaseId, string> = {
   1: "bg-gray-100 text-gray-800",

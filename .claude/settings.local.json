@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(mv /tmp/superpowers.backup /Users/jomok/vscode/1st/.superpowers)",
+      "Bash(mv /tmp/docs.backup /Users/jomok/vscode/1st/docs)",
+      "Bash(kill -9 13164 13162)",
+      "Bash(npm --version)",
+      "Bash(npm config:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://registry.npmjs.org/)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

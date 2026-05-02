@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Requirement, RequirementStatus } from "@/lib/types";
-import { STATUS_ORDER, canTransition, getPhaseFromStatus } from "@/lib/status";
+import { STATUS_ORDER, getPhaseFromStatus } from "@/lib/status";
 import { createClient } from "@/lib/supabase";
 import StatusBadge from "./StatusBadge";
 import PriorityBadge from "./PriorityBadge";

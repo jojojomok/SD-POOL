@@ -37,6 +37,7 @@ export default function Navbar() {
   const isAdmin = user.role === "pm" || user.role === "boss";
   const navLinks = [
     { href: "/", label: "看板" },
+    { href: "/quarter-plan", label: "本季度计划" },
     { href: "/table", label: "表格" },
     { href: "/requirements/new", label: "+ 新建需求" },
     ...(isAdmin ? [{ href: "/admin", label: "后台管理" }] : []),

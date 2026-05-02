@@ -88,6 +88,14 @@ export default function RequirementDetailPage() {
           <div className="flex gap-2">
             <PriorityBadge priority={req.priority} />
             <StatusBadge status={req.status} />
+            {canEdit && (
+              <a
+                href={`/requirements/${id}/edit`}
+                className="px-3 py-1.5 rounded-lg text-sm bg-white text-gray-700 border border-gray-300 hover:border-blue-400 transition"
+              >
+                编辑
+              </a>
+            )}
           </div>
         </div>
 

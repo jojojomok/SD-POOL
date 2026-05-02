@@ -66,6 +66,9 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
         .update(form)
         .eq("id", initialData.id);
       if (err) { setError(err.message); setSubmitting(false); return; }
+      router.push(`/requirements/${initialData.id}`);
+      router.refresh();
+      return;
     } else {
       const { error: err } = await supabase
         .from("requirements")
@@ -73,8 +76,10 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
       if (err) { setError(err.message); setSubmitting(false); return; }
     }
 
-    router.push("/");
-    router.refresh();
+    if (!isEdit) {
+      router.push("/");
+      router.refresh();
+    }
   };
 
   return (

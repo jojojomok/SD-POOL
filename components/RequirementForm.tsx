@@ -8,6 +8,21 @@ import { CreateRequirementInput, Priority, SystemOption, Requirement } from "@/l
 const systems: SystemOption[] = ["HIFOOD 1.0", "HIFOOD 2.0", "SAP", "CRM", "AI"];
 const priorities: Priority[] = ["P0", "P1", "P2", "P3", "P4"];
 
+function getQuarterOptions(): string[] {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const currentQ = Math.floor(month / 3) + 1;
+  const options: string[] = [];
+  for (let i = 0; i < 5; i++) {
+    const q = currentQ + i;
+    const y = year + Math.floor((q - 1) / 4);
+    const qNum = ((q - 1) % 4) + 1;
+    options.push(`${y}-Q${qNum}`);
+  }
+  return options;
+}
+
 interface Props {
   initialData?: Requirement;
   isEdit?: boolean;
@@ -31,6 +46,7 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
     deadline: initialData?.deadline || "",
     estimate: initialData?.estimate || undefined,
     version: initialData?.version || "",
+    quarter: initialData?.quarter || "",
   });
 
   const toggleSystem = (sys: SystemOption) => {
@@ -200,6 +216,20 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
             placeholder="v2.3"
           />
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">所属季度</label>
+        <select
+          value={form.quarter || ""}
+          onChange={(e) => setForm({ ...form, quarter: e.target.value || undefined })}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">不指定</option>
+          {getQuarterOptions().map((q) => (
+            <option key={q} value={q}>{q}</option>
+          ))}
+        </select>
       </div>
 
       <div>

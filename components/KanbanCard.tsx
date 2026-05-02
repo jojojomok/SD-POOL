@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Requirement, RequirementStatus } from "@/lib/types";
 import { STATUS_ORDER, getPhaseFromStatus } from "@/lib/status";
 import { createClient } from "@/lib/supabase";
@@ -16,8 +16,21 @@ export default function KanbanCard({
   onStatusChange?: () => void;
 }) {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [changing, setChanging] = useState(false);
+  const [isChanging, setIsChanging] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!showDropdown) return;
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showDropdown]);
 
   const currentIndex = STATUS_ORDER.indexOf(requirement.status);
   const availableStatuses = STATUS_ORDER.slice(currentIndex).filter(
@@ -25,7 +38,7 @@ export default function KanbanCard({
   );
 
   const handleStatusChange = async (newStatus: RequirementStatus) => {
-    setChanging(true);
+    setIsChanging(true);
     const phase = getPhaseFromStatus(newStatus);
     const { error } = await supabase
       .from("requirements")
@@ -34,7 +47,7 @@ export default function KanbanCard({
 
     if (error) {
       alert(error.message);
-      setChanging(false);
+      setIsChanging(false);
       return;
     }
 
@@ -46,7 +59,7 @@ export default function KanbanCard({
       detail: { from: requirement.status, to: newStatus },
     });
 
-    setChanging(false);
+    setIsChanging(false);
     setShowDropdown(false);
     onStatusChange?.();
   };
@@ -58,11 +71,12 @@ export default function KanbanCard({
       </a>
       <div className="flex flex-wrap gap-1 mb-2">
         <PriorityBadge priority={requirement.priority} />
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <button
+            type="button"
             onClick={(e) => { e.preventDefault(); setShowDropdown(!showDropdown); }}
             className="cursor-pointer"
-            disabled={changing}
+            disabled={isChanging}
           >
             <StatusBadge status={requirement.status} />
           </button>
@@ -71,6 +85,7 @@ export default function KanbanCard({
               {availableStatuses.map((s) => (
                 <button
                   key={s}
+                  type="button"
                   onClick={(e) => { e.preventDefault(); handleStatusChange(s); }}
                   className="block w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50"
                 >

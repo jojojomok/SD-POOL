@@ -39,6 +39,10 @@ yarn-error.log*
 # brainstorming companion
 .superpowers/
 
+# worktrees
+.worktrees/
+.claude/worktrees/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

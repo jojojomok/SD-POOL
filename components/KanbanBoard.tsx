@@ -27,7 +27,7 @@ export default function KanbanBoard() {
     setFiltered(requirements);
   }, [requirements]);
 
-  const handleFilterChange = (filters: { search?: string; system?: string; priority?: string }) => {
+  const handleFilterChange = (filters: { search?: string; system?: string; priority?: string; quarter?: string }) => {
     let result = requirements;
     if (filters.search) {
       result = result.filter((r) => r.title.includes(filters.search!));
@@ -37,6 +37,9 @@ export default function KanbanBoard() {
     }
     if (filters.priority) {
       result = result.filter((r) => r.priority === filters.priority);
+    }
+    if (filters.quarter) {
+      result = result.filter((r) => r.quarter === filters.quarter);
     }
     setFiltered(result);
   };

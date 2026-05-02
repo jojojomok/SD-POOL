@@ -65,7 +65,7 @@ export default function KanbanCard({
   };
 
   return (
-    <div className="block bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow relative">
+    <div className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow relative">
       <a href={`/requirements/${requirement.id}`}>
         <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{requirement.title}</h3>
       </a>

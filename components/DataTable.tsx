@@ -43,7 +43,7 @@ export default function DataTable({ requirements }: { requirements: Requirement[
           placeholder="搜索需求..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg text-sm"
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         />
       </div>
       <div className="overflow-x-auto bg-white rounded-xl border border-gray-200">
@@ -62,7 +62,7 @@ export default function DataTable({ requirements }: { requirements: Requirement[
               ].map((col) => (
                 <th
                   key={col.label}
-                  className="px-4 py-3 text-left font-medium text-gray-600 cursor-pointer hover:text-gray-900"
+                  className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-900"
                   onClick={() => col.key && toggleSort(col.key as SortField)}
                 >
                   {col.label}
@@ -73,7 +73,7 @@ export default function DataTable({ requirements }: { requirements: Requirement[
           </thead>
           <tbody>
             {sorted.map((req) => (
-              <tr key={req.id} className="border-b border-gray-100 hover:bg-gray-50">
+              <tr key={req.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors even:bg-gray-50/50">
                 <td className="px-4 py-3">
                   <a href={`/requirements/${req.id}`} className="text-blue-600 hover:underline font-medium">
                     {req.title}

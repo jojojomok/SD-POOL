@@ -55,7 +55,7 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
       <select
         value={system}
         onChange={(e) => { setSystem(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
       >
         <option value="">全部系统</option>
         {systems.map((s) => <option key={s} value={s}>{s}</option>)}
@@ -63,7 +63,7 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
       <select
         value={priority}
         onChange={(e) => { setPriority(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
       >
         <option value="">全部优先级</option>
         {priorities.map((p) => <option key={p} value={p}>{p}</option>)}
@@ -71,7 +71,7 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
       <select
         value={quarter}
         onChange={(e) => { setQuarter(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
       >
         <option value="">全部季度</option>
         {getQuarterOptions().map((q) => (

@@ -44,7 +44,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-3">
+    <nav className="bg-white border-b border-gray-200 px-4 py-3 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-6">
           <span className="font-bold text-lg text-gray-900">需求管理</span>
@@ -55,8 +55,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-sm ${
                   pathname === link.href
-                    ? "text-blue-600 font-medium"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "text-blue-600 font-medium border-b-2 border-blue-600 pb-0.5"
+                    : "text-gray-600 hover:text-gray-900 transition-colors"
                 }`}
               >
                 {link.label}

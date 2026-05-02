@@ -99,20 +99,20 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
+    <form onSubmit={handleSubmit} className="max-w-2xl space-y-6 bg-white rounded-xl border border-gray-200 p-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">需求标题 *</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">需求标题 *</label>
         <input
           type="text"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           required
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">所属系统 *</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">所属系统 *</label>
         <div className="flex flex-wrap gap-2">
           {systems.map((sys) => (
             <button
@@ -133,64 +133,64 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">优先级</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">优先级</label>
           <select
             value={form.priority}
             onChange={(e) => setForm({ ...form, priority: e.target.value as Priority })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           >
             {priorities.map((p) => <option key={p} value={p}>{p}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">期望完成时间</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">期望完成时间</label>
           <input
             type="date"
             value={form.deadline}
             onChange={(e) => setForm({ ...form, deadline: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">需求 Brief</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">需求 Brief</label>
         <input
           type="text"
           value={form.brief}
           onChange={(e) => setForm({ ...form, brief: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">需求描述</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">需求描述</label>
         <textarea
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
           rows={4}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">PRD 链接</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">PRD 链接</label>
           <input
             type="url"
             value={form.prd_url}
             onChange={(e) => setForm({ ...form, prd_url: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             placeholder="https://..."
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">墨刀链接</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">墨刀链接</label>
           <input
             type="url"
             value={form.mockup_url}
             onChange={(e) => setForm({ ...form, mockup_url: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             placeholder="https://..."
           />
         </div>
@@ -198,32 +198,32 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">所属模块</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">所属模块</label>
           <input
             type="text"
             value={form.module}
             onChange={(e) => setForm({ ...form, module: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">所属迭代/版本</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">所属迭代/版本</label>
           <input
             type="text"
             value={form.version}
             onChange={(e) => setForm({ ...form, version: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             placeholder="v2.3"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">所属季度</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">所属季度</label>
         <select
           value={form.quarter || ""}
           onChange={(e) => setForm({ ...form, quarter: e.target.value || undefined })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         >
           <option value="">不指定</option>
           {getQuarterOptions().map((q) => (
@@ -233,12 +233,12 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">预估工时/报价</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">预估工时/报价</label>
         <input
           type="number"
           value={form.estimate || ""}
           onChange={(e) => setForm({ ...form, estimate: e.target.value ? Number(e.target.value) : undefined })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           placeholder="人天或金额"
         />
       </div>
@@ -248,7 +248,7 @@ export default function RequirementForm({ initialData, isEdit }: Props) {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
+        className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 transition-colors font-medium"
       >
         {submitting ? "提交中..." : isEdit ? "保存修改" : "提交需求"}
       </button>

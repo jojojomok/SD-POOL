@@ -1,11 +1,11 @@
 import { SystemOption } from "@/lib/types";
 
 const tagColors: Record<SystemOption, string> = {
-  "HIFOOD 1.0": "bg-purple-100 text-purple-800",
-  "HIFOOD 2.0": "bg-indigo-100 text-indigo-800",
-  "SAP": "bg-cyan-100 text-cyan-800",
-  "CRM": "bg-pink-100 text-pink-800",
-  "AI": "bg-teal-100 text-teal-800",
+  "HIFOOD 1.0": "bg-blue-50 text-blue-600",
+  "HIFOOD 2.0": "bg-indigo-50 text-indigo-600",
+  "SAP": "bg-purple-50 text-purple-600",
+  "CRM": "bg-green-50 text-green-600",
+  "AI": "bg-cyan-50 text-cyan-600",
 };
 
 export default function SystemTags({ systems }: { systems: SystemOption[] }) {
@@ -13,7 +13,7 @@ export default function SystemTags({ systems }: { systems: SystemOption[] }) {
   return (
     <div className="flex flex-wrap gap-1">
       {systems.map((sys) => (
-        <span key={sys} className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${tagColors[sys] || "bg-gray-100 text-gray-600"}`}>
+        <span key={sys} className={`inline-block px-2 py-0.5 rounded-md text-xs font-medium ${tagColors[sys] || "bg-gray-100 text-gray-600"}`}>
           {sys}
         </span>
       ))}

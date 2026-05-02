@@ -50,7 +50,7 @@ export default function QuarterPlanPage() {
         <select
           value={selectedQuarter}
           onChange={(e) => setSelectedQuarter(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+          className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         >
           {quarters.map((q) => (
             <option key={q} value={q}>{q}</option>
@@ -67,13 +67,13 @@ export default function QuarterPlanPage() {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">需求标题</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">所属系统</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">优先级</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">是否已提交</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">当前状态</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">负责人</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-600">期望完成</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">需求标题</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">所属系统</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">优先级</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">是否已提交</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">当前状态</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">负责人</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">期望完成</th>
               </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@ export default function QuarterPlanPage() {
                 const currentIdx = STATUS_ORDER.indexOf(req.status);
                 const isSubmitted = currentIdx >= SUBMITTED_THRESHOLD;
                 return (
-                  <tr key={req.id} className="border-b border-gray-100 hover:bg-gray-50">
+                  <tr key={req.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors even:bg-gray-50/50">
                     <td className="px-4 py-3">
                       <a
                         href={`/requirements/${req.id}`}

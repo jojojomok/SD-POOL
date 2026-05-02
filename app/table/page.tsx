@@ -49,7 +49,7 @@ export default function TablePage() {
           <select
             value={quarter}
             onChange={(e) => setQuarter(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           >
             <option value="">全部季度</option>
             {getQuarterOptions().map((q) => (

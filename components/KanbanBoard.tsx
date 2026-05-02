@@ -9,6 +9,7 @@ import FilterBar from "./FilterBar";
 export default function KanbanBoard() {
   const [requirements, setRequirements] = useState<Requirement[]>([]);
   const [filtered, setFiltered] = useState<Requirement[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   const supabase = createClient();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function KanbanBoard() {
       if (data) setRequirements(data);
     };
     fetchRequirements();
-  }, [supabase]);
+  }, [supabase, refreshKey]);
 
   useEffect(() => {
     setFiltered(requirements);
@@ -51,7 +52,7 @@ export default function KanbanBoard() {
       <FilterBar onFilterChange={handleFilterChange} />
       <div className="flex gap-4 overflow-x-auto pb-4 mt-4">
         {grouped.map(({ phase, items }) => (
-          <KanbanColumn key={phase} phase={phase} requirements={items} />
+          <KanbanColumn key={phase} phase={phase} requirements={items} onStatusChange={() => setRefreshKey(k => k + 1)} />
         ))}
       </div>
     </div>

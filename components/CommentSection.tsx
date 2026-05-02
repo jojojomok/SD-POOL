@@ -49,9 +49,9 @@ export default function CommentSection({ requirementId }: { requirementId: strin
       <div className="space-y-4 mb-4">
         {comments.map((c) => (
           <div key={c.id} className="bg-gray-50 rounded-lg p-3">
-            <div className="flex items-center justify-between text-sm text-gray-500 mb-1">
-              <span className="font-medium">{c.user?.name || "未知"}</span>
-              <span>{new Date(c.created_at).toLocaleString("zh-CN")}</span>
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-medium text-sm text-gray-900">{c.user?.name || "未知"}</span>
+              <span className="text-xs text-gray-400">{new Date(c.created_at).toLocaleString("zh-CN")}</span>
             </div>
             <p className="text-gray-800">{c.content}</p>
           </div>
@@ -64,9 +64,9 @@ export default function CommentSection({ requirementId }: { requirementId: strin
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="添加评论..."
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm"
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
         />
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">
+        <button type="submit" className="px-4 py-1.5 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700">
           发送
         </button>
       </form>

@@ -23,11 +23,11 @@ export default function ActivityLog({ requirementId }: { requirementId: string }
   return (
     <div>
       <h3 className="font-medium text-gray-900 mb-4">操作记录</h3>
-      <div className="space-y-3">
+      <div className="border-l-2 border-gray-200 pl-4 ml-2">
         {logs.map((log) => (
-          <div key={log.id} className="flex items-start gap-3 text-sm">
-            <div className="w-2 h-2 rounded-full bg-gray-400 mt-1.5 flex-shrink-0" />
-            <div>
+          <div key={log.id} className="pb-4 relative">
+            <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white border-2 border-gray-300" />
+            <div className="text-sm text-gray-700">
               <span className="font-medium text-gray-700">{log.user?.name || "未知"}</span>
               {" "}
               <span className="text-gray-600">{log.action}</span>
@@ -36,9 +36,9 @@ export default function ActivityLog({ requirementId }: { requirementId: string }
                   ：{(log.detail as any).from} → {(log.detail as any).to}
                 </span>
               )}
-              <div className="text-gray-400 text-xs mt-0.5">
-                {new Date(log.created_at).toLocaleString("zh-CN")}
-              </div>
+            </div>
+            <div className="text-xs text-gray-400 mt-0.5">
+              {new Date(log.created_at).toLocaleString("zh-CN")}
             </div>
           </div>
         ))}

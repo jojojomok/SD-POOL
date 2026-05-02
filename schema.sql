@@ -29,6 +29,7 @@ CREATE TABLE requirements (
   estimate NUMERIC,
   assignee_id UUID REFERENCES users(id),
   version TEXT,
+  quarter TEXT,
   status TEXT NOT NULL DEFAULT '待跟进',
   phase INTEGER NOT NULL DEFAULT 1,
   attachments JSONB DEFAULT '[]',
@@ -101,3 +102,7 @@ CREATE POLICY "pm_boss_delete_requirements" ON requirements FOR DELETE USING (
 
 CREATE POLICY "anyone_can_insert_comments" ON comments FOR INSERT WITH CHECK (auth.role() = 'authenticated');
 CREATE POLICY "anyone_can_insert_logs" ON logs FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+
+-- Migration: Add quarter column
+ALTER TABLE requirements ADD COLUMN quarter TEXT;
+CREATE INDEX IF NOT EXISTS idx_requirements_quarter ON requirements(quarter);

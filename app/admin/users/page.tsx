@@ -57,7 +57,7 @@ export default function AdminUsersPage() {
             placeholder="姓名"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             required
           />
           <input
@@ -65,7 +65,7 @@ export default function AdminUsersPage() {
             placeholder="邮箱"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             required
           />
           <input
@@ -73,20 +73,20 @@ export default function AdminUsersPage() {
             placeholder="初始密码"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             required
           />
           <select
             value={role}
             onChange={(e) => setRole(e.target.value as Role)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           >
             <option value="stakeholder">需求方</option>
             <option value="pm">PM</option>
             <option value="boss">上级</option>
           </select>
         </div>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">
+        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 active:bg-blue-800 transition-colors">
           添加
         </button>
       </form>
@@ -95,14 +95,14 @@ export default function AdminUsersPage() {
         <table className="w-full text-sm">
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th className="px-4 py-3 text-left text-gray-600">姓名</th>
-              <th className="px-4 py-3 text-left text-gray-600">邮箱</th>
-              <th className="px-4 py-3 text-left text-gray-600">角色</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">姓名</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">邮箱</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">角色</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} className="border-b border-gray-100">
+              <tr key={u.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors even:bg-gray-50/50">
                 <td className="px-4 py-3">{u.name}</td>
                 <td className="px-4 py-3 text-gray-600">{u.email}</td>
                 <td className="px-4 py-3">

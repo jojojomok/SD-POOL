@@ -12,21 +12,27 @@ export default function EditRequirementPage() {
   const supabase = createClient();
   const [req, setReq] = useState<Requirement | null>(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("requirements")
         .select("*")
         .eq("id", id)
         .single();
-      if (data) setReq(data);
+      if (error) {
+        setFetchError("加载失败: " + error.message);
+      } else if (data) {
+        setReq(data);
+      }
       setLoading(false);
     };
     fetch();
   }, [supabase, id]);
 
   if (loading) return <div className="text-center py-12 text-gray-500">加载中...</div>;
+  if (fetchError) return <div className="text-center py-12 text-red-500">{fetchError}</div>;
   if (!req) return <div className="text-center py-12 text-gray-500">需求不存在</div>;
 
   return (

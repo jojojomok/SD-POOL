@@ -71,6 +71,20 @@ export default function RequirementDetailPage() {
     if (data) setReq(data);
   };
 
+  const handleDelete = async () => {
+    if (!confirm("确认删除此需求？此操作不可撤销。")) return;
+    const { error } = await supabase
+      .from("requirements")
+      .delete()
+      .eq("id", id);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    router.push("/");
+    router.refresh();
+  };
+
   if (!req) return <div className="text-center py-12 text-gray-500">加载中...</div>;
 
   const currentIndex = STATUS_ORDER.indexOf(req.status);
@@ -89,12 +103,20 @@ export default function RequirementDetailPage() {
             <PriorityBadge priority={req.priority} />
             <StatusBadge status={req.status} />
             {canEdit && (
-              <a
-                href={`/requirements/${id}/edit`}
-                className="px-3 py-1.5 rounded-lg text-sm bg-white text-gray-700 border border-gray-300 hover:border-blue-400 transition"
-              >
-                编辑
-              </a>
+              <>
+                <a
+                  href={`/requirements/${id}/edit`}
+                  className="px-3 py-1.5 rounded-lg text-sm bg-white text-gray-700 border border-gray-300 hover:border-blue-400 transition"
+                >
+                  编辑
+                </a>
+                <button
+                  onClick={handleDelete}
+                  className="px-3 py-1.5 rounded-lg text-sm bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 transition"
+                >
+                  删除
+                </button>
+              </>
             )}
           </div>
         </div>

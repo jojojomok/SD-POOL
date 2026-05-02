@@ -44,6 +44,7 @@ export interface Requirement {
   estimate?: number;
   assignee_id?: string;
   version?: string;
+  quarter?: string;
   status: RequirementStatus;
   phase: PhaseId;
   attachments?: string[];
@@ -85,6 +86,7 @@ export interface CreateRequirementInput {
   deadline?: string;
   estimate?: number;
   version?: string;
+  quarter?: string;
   attachments?: string[];
 }
 

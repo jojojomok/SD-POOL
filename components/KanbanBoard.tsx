@@ -9,6 +9,7 @@ import FilterBar from "./FilterBar";
 export default function KanbanBoard() {
   const [requirements, setRequirements] = useState<Requirement[]>([]);
   const [filtered, setFiltered] = useState<Requirement[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   const supabase = createClient();
 
   useEffect(() => {
@@ -20,13 +21,13 @@ export default function KanbanBoard() {
       if (data) setRequirements(data);
     };
     fetchRequirements();
-  }, [supabase]);
+  }, [supabase, refreshKey]);
 
   useEffect(() => {
     setFiltered(requirements);
   }, [requirements]);
 
-  const handleFilterChange = (filters: { search?: string; system?: string; priority?: string }) => {
+  const handleFilterChange = (filters: { search?: string; system?: string; priority?: string; quarter?: string }) => {
     let result = requirements;
     if (filters.search) {
       result = result.filter((r) => r.title.includes(filters.search!));
@@ -36,6 +37,9 @@ export default function KanbanBoard() {
     }
     if (filters.priority) {
       result = result.filter((r) => r.priority === filters.priority);
+    }
+    if (filters.quarter) {
+      result = result.filter((r) => r.quarter === filters.quarter);
     }
     setFiltered(result);
   };
@@ -51,7 +55,7 @@ export default function KanbanBoard() {
       <FilterBar onFilterChange={handleFilterChange} />
       <div className="flex gap-4 overflow-x-auto pb-4 mt-4">
         {grouped.map(({ phase, items }) => (
-          <KanbanColumn key={phase} phase={phase} requirements={items} />
+          <KanbanColumn key={phase} phase={phase} requirements={items} onStatusChange={() => setRefreshKey(k => k + 1)} />
         ))}
       </div>
     </div>

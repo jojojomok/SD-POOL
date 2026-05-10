@@ -1,4 +1,6 @@
-export default function SystemTags({ systems }: { systems: string[] }) {
+import type { SystemOption } from "@/lib/types";
+
+export default function SystemTags({ systems }: { systems: SystemOption[] }) {
   if (!systems?.length) return null;
   return (
     <div className="flex flex-wrap gap-1.5">

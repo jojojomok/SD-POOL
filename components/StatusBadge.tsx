@@ -14,7 +14,9 @@ const statusStyles: Record<string, { dot: string; bg: string; text: string }> = 
   "已上线":     { dot: "#12b886", bg: "#d3f9d8", text: "#2b8a3e" },
 };
 
-export default function StatusBadge({ status }: { status: string }) {
+import type { RequirementStatus } from "@/lib/types";
+
+export default function StatusBadge({ status }: { status: RequirementStatus }) {
   const style = statusStyles[status] ?? statusStyles["待跟进"];
   return (
     <span

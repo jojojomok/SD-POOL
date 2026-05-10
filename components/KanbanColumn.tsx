@@ -8,33 +8,31 @@ interface Props {
   onStatusChange?: () => void;
 }
 
-const bgColors: Record<PhaseId, string> = {
-  1: "bg-gray-50",
-  2: "bg-yellow-50",
-  3: "bg-blue-50",
-  4: "bg-green-50",
-};
-
-const headerColors: Record<PhaseId, string> = {
-  1: "bg-gray-200 text-gray-800",
-  2: "bg-yellow-200 text-yellow-800",
-  3: "bg-blue-200 text-blue-800",
-  4: "bg-green-200 text-green-800",
+const phaseStyles: Record<PhaseId, { bg: string; dot: string }> = {
+  1: { bg: "bg-[#f8f9fa]", dot: "#adb5bd" },
+  2: { bg: "bg-[#fffbeb]", dot: "#f59e0b" },
+  3: { bg: "bg-[#f0f5ff]", dot: "#3b82f6" },
+  4: { bg: "bg-[#f0faf5]", dot: "#12b886" },
 };
 
 export default function KanbanColumn({ phase, requirements, onStatusChange }: Props) {
+  const style = phaseStyles[phase];
+
   return (
-    <div className={`flex-shrink-0 w-72 rounded-xl ${bgColors[phase]} p-3`}>
-      <div className={`rounded-lg px-3 py-2 mb-3 font-medium text-sm ${headerColors[phase]}`}>
-        {PHASE_LABELS[phase]}
-        <span className="ml-2 text-xs opacity-70">({requirements.length})</span>
+    <div className={`w-80 shrink-0 rounded-xl ${style.bg} p-4`}>
+      <div className="flex items-center gap-2.5 mb-4">
+        <span className="w-2 h-2 rounded-full" style={{ background: style.dot }} />
+        <h2 className="text-[15px] font-bold text-[#0f172a]">{PHASE_LABELS[phase]}</h2>
+        <span className="ml-auto text-[12px] text-[#868e96] bg-white px-2 py-0.5 rounded-full border border-[#e9ecef]">
+          {requirements.length}
+        </span>
       </div>
-      <div className="space-y-3 min-h-[200px]">
+      <div className="flex flex-col gap-3 min-h-[200px]">
         {requirements.map((req) => (
           <KanbanCard key={req.id} requirement={req} onStatusChange={onStatusChange} />
         ))}
         {requirements.length === 0 && (
-          <p className="text-gray-400 text-sm text-center py-8">暂无需求</p>
+          <p className="text-[#adb5bd] text-[13px] text-center py-8">暫無需求</p>
         )}
       </div>
     </div>

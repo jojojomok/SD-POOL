@@ -20,7 +20,6 @@ export default function KanbanCard({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
 
-  // Close dropdown on outside click
   useEffect(() => {
     if (!showDropdown) return;
     const handleClick = (e: MouseEvent) => {
@@ -65,11 +64,13 @@ export default function KanbanCard({
   };
 
   return (
-    <div className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow relative">
-      <a href={`/requirements/${requirement.id}`}>
-        <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{requirement.title}</h3>
+    <div className="bg-white rounded-xl border border-[#dee2e6] p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] transition-all duration-200">
+      <a href={`/requirements/${requirement.id}`} className="block no-underline">
+        <h3 className="text-[15px] font-semibold text-[#0f172a] leading-snug mb-3 line-clamp-2">
+          {requirement.title}
+        </h3>
       </a>
-      <div className="flex flex-wrap gap-1 mb-2">
+      <div className="flex items-center gap-2 mb-3">
         <PriorityBadge priority={requirement.priority} />
         <div className="relative" ref={dropdownRef}>
           <button
@@ -81,13 +82,13 @@ export default function KanbanCard({
             <StatusBadge status={requirement.status} />
           </button>
           {showDropdown && availableStatuses.length > 0 && (
-            <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1 min-w-[120px]">
+            <div className="absolute top-full left-0 mt-1 bg-white border border-[#dee2e6] rounded-lg shadow-lg z-20 py-1 min-w-[130px]">
               {availableStatuses.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={(e) => { e.preventDefault(); handleStatusChange(s); }}
-                  className="block w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50"
+                  className="block w-full text-left px-3 py-1.5 text-[13px] text-[#495057] hover:bg-[#fff3bf]"
                 >
                   {s}
                 </button>
@@ -97,9 +98,9 @@ export default function KanbanCard({
         </div>
       </div>
       <SystemTags systems={requirement.system} />
-      <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
-        <span>{requirement.submitter?.name || "未知"}</span>
-        {requirement.deadline && <span>截止: {requirement.deadline}</span>}
+      <div className="flex items-center justify-between pt-2.5 mt-2.5 border-t border-[#f1f3f5] text-[12px]">
+        <span className="text-[#495057]">{requirement.submitter?.name || "未知"}</span>
+        {requirement.deadline && <span className="text-[#868e96]">截止: {requirement.deadline}</span>}
       </div>
     </div>
   );

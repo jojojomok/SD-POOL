@@ -1,30 +1,41 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import { useEffect, useState } from "react";
-import { User } from "@/lib/types";
+import type { User } from "@supabase/supabase-js";
+
+const navLinks = [
+  { href: "/", label: "看板" },
+  { href: "/quarter-plan", label: "本季度計劃" },
+  { href: "/table", label: "表格" },
+  { href: "/requirements/new", label: "+ 新建需求" },
+];
 
 export default function Navbar() {
-  const router = useRouter();
   const pathname = usePathname();
-  const supabase = createClient();
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<string>("");
+  const supabase = createClient();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user: authUser } } = await supabase.auth.getUser();
-      if (authUser) {
-        const { data } = await supabase
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user) {
+        setUser(data.user);
+        supabase
           .from("users")
-          .select("*")
-          .eq("id", authUser.id)
-          .single();
-        setUser(data);
+          .select("role")
+          .eq("id", data.user.id)
+          .single()
+          .then(({ data: profile }) => {
+            if (profile) setRole(profile.role);
+          });
       }
-    };
-    fetchUser();
-  }, [supabase]);
+    });
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -34,46 +45,61 @@ export default function Navbar() {
 
   if (!user || pathname === "/login") return null;
 
-  const isAdmin = user.role === "pm" || user.role === "boss";
-  const navLinks = [
-    { href: "/", label: "看板" },
-    { href: "/quarter-plan", label: "本季度计划" },
-    { href: "/table", label: "表格" },
-    { href: "/requirements/new", label: "+ 新建需求" },
-    ...(isAdmin ? [{ href: "/admin", label: "后台管理" }] : []),
-  ];
+  const roleLabel: Record<string, string> = { pm: "PM", boss: "上級", stakeholder: "需" };
+  const roleInitial = roleLabel[role] || "?";
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-3 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <span className="font-bold text-lg text-gray-900">需求管理</span>
-          <div className="flex gap-4">
-            {navLinks.map((link) => (
-              <a
+    <nav className="h-14 bg-white border-b border-[#e9ecef]">
+      <div className="max-w-7xl mx-auto px-8 h-full flex items-center gap-8">
+        <Link href="/" className="font-bold text-[16px] text-[#0f172a] shrink-0">
+          需求管理
+        </Link>
+        <div className="flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm ${
-                  pathname === link.href
-                    ? "text-blue-600 font-medium border-b-2 border-blue-600 pb-0.5"
-                    : "text-gray-600 hover:text-gray-900 transition-colors"
+                className={`px-3.5 py-[6px] rounded-lg text-[13px] font-medium transition-colors ${
+                  isActive
+                    ? "bg-[#fffbeb] text-[#d97706]"
+                    : "text-[#495057] hover:text-[#0f172a] hover:bg-[#f1f3f5]"
                 }`}
               >
                 {link.label}
-              </a>
-            ))}
-          </div>
+              </Link>
+            );
+          })}
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-500">
-            {user.name} ({user.role === "pm" ? "PM" : user.role === "boss" ? "上级" : "需求方"})
-          </span>
+        {(role === "pm" || role === "boss") && (
+          <Link
+            href="/admin"
+            className={`px-3.5 py-[6px] rounded-lg text-[13px] font-medium transition-colors ${
+              pathname.startsWith("/admin")
+                ? "bg-[#fffbeb] text-[#d97706]"
+                : "text-[#495057] hover:text-[#0f172a] hover:bg-[#f1f3f5]"
+            }`}
+          >
+            後台管理
+          </Link>
+        )}
+        <div className="ml-auto flex items-center gap-3">
           <button
             onClick={handleLogout}
-            className="text-sm text-gray-500 hover:text-gray-700"
+            className="text-[12px] text-[#adb5bd] hover:text-[#495057] transition-colors"
           >
             退出
           </button>
+          <span className="text-[13px] text-[#495057]">
+            {user.email?.split("@")[0]}
+          </span>
+          <div
+            className="w-8 h-8 rounded-full bg-[#f59e0b] flex items-center justify-center text-white text-[12px] font-bold cursor-default"
+            title={role === "pm" ? "PM" : role === "boss" ? "上級" : "需求方"}
+          >
+            {roleInitial}
+          </div>
         </div>
       </div>
     </nav>

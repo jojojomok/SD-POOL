@@ -1,24 +1,27 @@
-import { RequirementStatus } from "@/lib/types";
-
-const STATUS_COLORS: Record<string, string> = {
-  "待跟进": "bg-gray-100 text-gray-600",
-  "跟进中": "bg-blue-100 text-blue-700",
-  "待审批": "bg-yellow-100 text-yellow-700",
-  "待用户确认": "bg-orange-100 text-orange-700",
-  "开发评审": "bg-purple-100 text-purple-700",
-  "报价中": "bg-pink-100 text-pink-700",
-  "待确认华定币": "bg-rose-100 text-rose-700",
-  "待开发": "bg-cyan-100 text-cyan-700",
-  "开发中": "bg-indigo-100 text-indigo-700",
-  "测试中": "bg-violet-100 text-violet-700",
-  "用户验收": "bg-teal-100 text-teal-700",
-  "待发布": "bg-emerald-100 text-emerald-700",
-  "已上线": "bg-green-100 text-green-700",
+const statusStyles: Record<string, { dot: string; bg: string; text: string }> = {
+  "待跟进":     { dot: "#adb5bd", bg: "#f8f9fa", text: "#495057" },
+  "跟进中":     { dot: "#f59e0b", bg: "#fff3bf", text: "#92400e" },
+  "待审批":     { dot: "#3b82f6", bg: "#dbe4ff", text: "#364fc7" },
+  "待用户确认": { dot: "#f59e0b", bg: "#fff3bf", text: "#92400e" },
+  "开发评审":   { dot: "#3b82f6", bg: "#dbe4ff", text: "#364fc7" },
+  "报价中":     { dot: "#f59e0b", bg: "#fff3bf", text: "#92400e" },
+  "待确认华定币": { dot: "#f59e0b", bg: "#fff3bf", text: "#92400e" },
+  "待开发":     { dot: "#3b82f6", bg: "#dbe4ff", text: "#364fc7" },
+  "开发中":     { dot: "#3b82f6", bg: "#dbe4ff", text: "#364fc7" },
+  "测试中":     { dot: "#3b82f6", bg: "#dbe4ff", text: "#364fc7" },
+  "用户验收":   { dot: "#7950f2", bg: "#f3d9fa", text: "#862e9c" },
+  "待发布":     { dot: "#12b886", bg: "#d3f9d8", text: "#2b8a3e" },
+  "已上线":     { dot: "#12b886", bg: "#d3f9d8", text: "#2b8a3e" },
 };
 
-export default function StatusBadge({ status }: { status: RequirementStatus }) {
+export default function StatusBadge({ status }: { status: string }) {
+  const style = statusStyles[status] ?? statusStyles["待跟进"];
   return (
-    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[status] || "bg-gray-100 text-gray-600"}`}>
+    <span
+      className="inline-flex items-center gap-[5px] px-[10px] py-[2px] rounded-full text-[11px] font-medium"
+      style={{ background: style.bg, color: style.text, border: `1px solid ${style.bg}` }}
+    >
+      <span className="w-[5px] h-[5px] rounded-full" style={{ background: style.dot }} />
       {status}
     </span>
   );

@@ -18,31 +18,38 @@ export default function ActivityLog({ requirementId }: { requirementId: string }
       if (data) setLogs(data);
     };
     fetchLogs();
-  }, [supabase, requirementId]);
+  }, [requirementId]);
 
   return (
-    <div>
-      <h3 className="font-medium text-gray-900 mb-4">操作记录</h3>
-      <div className="border-l-2 border-gray-200 pl-4 ml-2">
-        {logs.map((log) => (
-          <div key={log.id} className="pb-4 relative">
-            <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white border-2 border-gray-300" />
-            <div className="text-sm text-gray-700">
-              <span className="font-medium text-gray-700">{log.user?.name || "未知"}</span>
-              {" "}
-              <span className="text-gray-600">{log.action}</span>
-              {(log.detail as any)?.from && (log.detail as any)?.to && (
-                <span className="text-gray-500">
-                  ：{(log.detail as any).from} → {(log.detail as any).to}
+    <div className="bg-white rounded-xl border border-[#e9ecef] p-5">
+      <h3 className="text-[15px] font-bold text-[#0f172a] mb-4">活动记录</h3>
+      <div className="relative">
+        <div className="absolute left-[11px] top-2 bottom-2 w-px bg-[#e9ecef]" />
+        <div className="space-y-4">
+          {logs.map((log) => (
+            <div key={log.id} className="flex gap-3 relative">
+              <div className="w-[24px] shrink-0 flex items-start pt-0.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] ring-2 ring-white relative z-10" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[13px] text-[#495057]">
+                  <span className="font-medium text-[#0f172a]">{log.user?.name || "未知"}</span>
+                  {" "}
+                  <span>{log.action}</span>
+                  {(log.detail as any)?.from && (log.detail as any)?.to && (
+                    <span>
+                      ：{(log.detail as any).from} → {(log.detail as any).to}
+                    </span>
+                  )}
+                </p>
+                <span className="text-[11px] text-[#adb5bd]">
+                  {new Date(log.created_at).toLocaleString("zh-CN")}
                 </span>
-              )}
+              </div>
             </div>
-            <div className="text-xs text-gray-400 mt-0.5">
-              {new Date(log.created_at).toLocaleString("zh-CN")}
-            </div>
-          </div>
-        ))}
-        {logs.length === 0 && <p className="text-gray-400 text-sm">暂无记录</p>}
+          ))}
+          {logs.length === 0 && <p className="text-[#adb5bd] text-[13px]">暂无记录</p>}
+        </div>
       </div>
     </div>
   );

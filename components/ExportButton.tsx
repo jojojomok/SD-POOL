@@ -41,7 +41,7 @@ export default function ExportButton() {
   return (
     <button
       onClick={handleExport}
-      className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition"
+      className="px-4 py-2 bg-[#f59e0b] text-white rounded-lg text-[13px] hover:bg-[#d97706] transition-colors"
     >
       导出 CSV
     </button>

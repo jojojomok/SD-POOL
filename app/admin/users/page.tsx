@@ -48,16 +48,16 @@ export default function AdminUsersPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-gray-900 mb-6">用户管理</h1>
+      <h1 className="text-xl font-bold text-[#0f172a] mb-6">用户管理</h1>
 
-      <form onSubmit={handleCreate} className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h2 className="font-medium text-gray-900 mb-4">添加用户</h2>
+      <form onSubmit={handleCreate} className="bg-white rounded-xl border border-[#e9ecef] p-6 mb-6">
+        <h2 className="font-medium text-[#0f172a] mb-4">添加用户</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <input
             placeholder="姓名"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="px-4 py-2 border border-[#dee2e6] rounded-lg text-sm focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] outline-none"
             required
           />
           <input
@@ -65,7 +65,7 @@ export default function AdminUsersPage() {
             placeholder="邮箱"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="px-4 py-2 border border-[#dee2e6] rounded-lg text-sm focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] outline-none"
             required
           />
           <input
@@ -73,38 +73,38 @@ export default function AdminUsersPage() {
             placeholder="初始密码"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="px-4 py-2 border border-[#dee2e6] rounded-lg text-sm focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] outline-none"
             required
           />
           <select
             value={role}
             onChange={(e) => setRole(e.target.value as Role)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="px-4 py-2 border border-[#dee2e6] rounded-lg text-sm focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] outline-none"
           >
             <option value="stakeholder">需求方</option>
             <option value="pm">PM</option>
             <option value="boss">上级</option>
           </select>
         </div>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 active:bg-blue-800 transition-colors">
+        <button type="submit" className="px-4 py-2 bg-[#f59e0b] text-white rounded-lg text-sm hover:bg-[#d97706] active:bg-[#b45309] transition-colors">
           添加
         </button>
       </form>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-[#e9ecef] overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-[#f8f9fa] border-b border-[#e9ecef]">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">姓名</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">邮箱</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">角色</th>
+              <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#868e96] uppercase tracking-wider">姓名</th>
+              <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#868e96] uppercase tracking-wider">邮箱</th>
+              <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#868e96] uppercase tracking-wider">角色</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors even:bg-gray-50/50">
+              <tr key={u.id} className="border-b border-[#f1f3f5] hover:bg-[#fffbeb] transition-colors even:bg-[#fafafa]">
                 <td className="px-4 py-3">{u.name}</td>
-                <td className="px-4 py-3 text-gray-600">{u.email}</td>
+                <td className="px-4 py-3 text-[#495057]">{u.email}</td>
                 <td className="px-4 py-3">
                   {u.role === "pm" ? "PM" : u.role === "boss" ? "上级" : "需求方"}
                 </td>

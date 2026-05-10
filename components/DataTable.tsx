@@ -43,13 +43,13 @@ export default function DataTable({ requirements }: { requirements: Requirement[
           placeholder="搜索需求..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          className="w-full max-w-md px-4 py-2 border border-[#dee2e6] rounded-lg text-[13px] outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b]"
         />
       </div>
-      <div className="overflow-x-auto bg-white rounded-xl border border-gray-200">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
+      <div className="overflow-x-auto bg-white rounded-xl border border-[#e9ecef]">
+        <table className="w-full text-[13px]">
+          <thead>
+            <tr className="bg-[#f8f9fa] border-b border-[#e9ecef]">
               {[
                 { key: "title", label: "需求标题" },
                 { key: "priority", label: "优先级" },
@@ -62,7 +62,7 @@ export default function DataTable({ requirements }: { requirements: Requirement[
               ].map((col) => (
                 <th
                   key={col.label}
-                  className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-900"
+                  className="px-4 py-3 text-left text-[11px] font-semibold text-[#868e96] uppercase tracking-wider cursor-pointer hover:text-[#0f172a]"
                   onClick={() => col.key && toggleSort(col.key as SortField)}
                 >
                   {col.label}
@@ -72,20 +72,20 @@ export default function DataTable({ requirements }: { requirements: Requirement[
             </tr>
           </thead>
           <tbody>
-            {sorted.map((req) => (
-              <tr key={req.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors even:bg-gray-50/50">
+            {sorted.map((req, i) => (
+              <tr key={req.id} className={`border-b border-[#f1f3f5] hover:bg-[#fffbeb] transition-colors ${i % 2 === 0 ? "" : "bg-[#fafafa]"}`}>
                 <td className="px-4 py-3">
-                  <a href={`/requirements/${req.id}`} className="text-blue-600 hover:underline font-medium">
+                  <a href={`/requirements/${req.id}`} className="text-[#d97706] hover:text-[#b45309] font-medium no-underline">
                     {req.title}
                   </a>
                 </td>
                 <td className="px-4 py-3"><PriorityBadge priority={req.priority} /></td>
                 <td className="px-4 py-3"><StatusBadge status={req.status} /></td>
                 <td className="px-4 py-3"><SystemTags systems={req.system} /></td>
-                <td className="px-4 py-3 text-gray-600">{req.deadline || "-"}</td>
-                <td className="px-4 py-3 text-gray-600">{req.assignee?.name || "-"}</td>
-                <td className="px-4 py-3 text-gray-600">{req.version || "-"}</td>
-                <td className="px-4 py-3 text-gray-500 text-xs">
+                <td className="px-4 py-3 text-[#495057]">{req.deadline || "-"}</td>
+                <td className="px-4 py-3 text-[#495057]">{req.assignee?.name || "-"}</td>
+                <td className="px-4 py-3 text-[#495057]">{req.version || "-"}</td>
+                <td className="px-4 py-3 text-[#868e96] text-[12px]">
                   {new Date(req.created_at).toLocaleDateString("zh-CN")}
                 </td>
               </tr>
@@ -93,7 +93,7 @@ export default function DataTable({ requirements }: { requirements: Requirement[
           </tbody>
         </table>
         {sorted.length === 0 && (
-          <p className="text-gray-400 text-center py-8">暂无数据</p>
+          <p className="text-[#adb5bd] text-center py-8 text-[13px]">暂无数据</p>
         )}
       </div>
     </div>

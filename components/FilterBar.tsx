@@ -44,18 +44,18 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-xl border border-gray-200">
+    <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-xl border border-[#e9ecef]">
       <input
         type="text"
         placeholder="搜索需求标题..."
         value={search}
         onChange={(e) => { setSearch(e.target.value); setTimeout(handleChange, 0); }}
-        className="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+        className="flex-1 min-w-[200px] px-4 py-2 border border-[#dee2e6] rounded-lg text-[13px] outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b]"
       />
       <select
         value={system}
         onChange={(e) => { setSystem(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        className="px-3 py-2 border border-[#dee2e6] rounded-lg text-[13px] outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] bg-white"
       >
         <option value="">全部系统</option>
         {systems.map((s) => <option key={s} value={s}>{s}</option>)}
@@ -63,7 +63,7 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
       <select
         value={priority}
         onChange={(e) => { setPriority(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        className="px-3 py-2 border border-[#dee2e6] rounded-lg text-[13px] outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] bg-white"
       >
         <option value="">全部优先级</option>
         {priorities.map((p) => <option key={p} value={p}>{p}</option>)}
@@ -71,7 +71,7 @@ export default function FilterBar({ onFilterChange }: { onFilterChange: (f: Filt
       <select
         value={quarter}
         onChange={(e) => { setQuarter(e.target.value); handleChange(); }}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        className="px-3 py-2 border border-[#dee2e6] rounded-lg text-[13px] outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] bg-white"
       >
         <option value="">全部季度</option>
         {getQuarterOptions().map((q) => (

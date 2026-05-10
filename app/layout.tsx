@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className="bg-gray-50 min-h-screen">
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 py-6">{children}</main>
+        <main className="max-w-7xl mx-auto px-8 py-8">{children}</main>
       </body>
     </html>
   );
